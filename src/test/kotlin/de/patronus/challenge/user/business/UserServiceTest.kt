@@ -21,7 +21,7 @@ class UserServiceTest {
 
         sut.createUser(user)
 
-        verify { userPersistenceService.createUser(user)}
+        verify { userPersistenceService.createUser(user) }
     }
 
     private fun createUser() = User(UUID.randomUUID(),"Bruce", "Wayne", createAddress(), LocalDate.of(2000, 1, 1))
