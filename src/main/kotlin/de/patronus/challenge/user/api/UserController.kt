@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping(ChallengeApplication.SERVER_URL_PATH_API + "/user")
+@RequestMapping(ChallengeApplication.SERVER_URL_PATH_API + "/users")
 class UserController(
     private val userService: UserService,
     private val mapper: UserDTOMapper
