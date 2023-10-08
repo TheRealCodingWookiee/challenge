@@ -8,7 +8,7 @@ plugins {
 	kotlin("jvm") version kotlinVersion
 	kotlin("plugin.spring") version kotlinVersion
 	kotlin("kapt") version kotlinVersion
-
+	kotlin("plugin.jpa") version kotlinVersion
 }
 
 group = "de.patronus"
@@ -29,9 +29,11 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.mapstruct:mapstruct:1.5.5.Final")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
 	kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
@@ -65,3 +67,5 @@ tasks.withType<KotlinCompile> {
 tasks.test {
 	useJUnitPlatform()
 }
+
+allOpen { annotation("jakarta.persistence.Entity") }
