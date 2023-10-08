@@ -1,12 +1,12 @@
 package de.patronus.challenge.user.api
 
-import java.util.Date
+import java.time.LocalDate
 
 data class UserDTO(
     val firstName: String,
     val lastName: String,
     val address: AddressDTO,
-    val birthday: Date
+    val birthday: LocalDate
 )
 
 data class AddressDTO(
