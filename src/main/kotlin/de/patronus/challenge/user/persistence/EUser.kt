@@ -10,7 +10,7 @@ import java.util.UUID
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "users") //users because else exception since it is keyword for hibernate
 data class EUser(
     @Id @GeneratedValue var id: UUID?,
     var firstName: String,
