@@ -19,4 +19,8 @@ class UserService(
         deviceService.validateDeviceAssignment(device.id!!)
         return userPersistenceService.assignDeviceToUser(device, userId)
     }
+
+    fun getAllUsersWithDevices(): List<User> {
+        return userPersistenceService.findAllUsersWithDevices()
+    }
 }

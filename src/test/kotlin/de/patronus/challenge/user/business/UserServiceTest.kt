@@ -38,4 +38,11 @@ class UserServiceTest {
 
         verify { userPersistenceService.assignDeviceToUser(device, ID) }
     }
+
+    @Test
+    fun `should delegate to user persistence service if get all users with devices`() {
+        sut.getAllUsersWithDevices()
+
+        verify { userPersistenceService.findAllUsersWithDevices() }
+    }
 }
