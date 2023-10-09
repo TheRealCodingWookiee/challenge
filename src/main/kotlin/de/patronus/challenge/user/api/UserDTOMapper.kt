@@ -8,6 +8,5 @@ import org.mapstruct.Mapping
 @Mapper(uses = [DeviceDTOMapper::class])
 interface UserDTOMapper {
     fun toDto(model: User): UserDTO
-    @Mapping(target = "id", ignore = true)
     fun toModel(dto: UserDTO): User
 }
