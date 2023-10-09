@@ -2,10 +2,8 @@ package de.patronus.challenge.user.api
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import de.patronus.challenge.device.DeviceFixture.createDevice
 import de.patronus.challenge.device.DeviceFixture.createDeviceDTO
 import de.patronus.challenge.device.api.DeviceDTOMapperImpl
-import de.patronus.challenge.user.UserFixture
 import de.patronus.challenge.user.UserFixture.ID
 import de.patronus.challenge.user.UserFixture.createUser
 import de.patronus.challenge.user.UserFixture.createUserDTO
@@ -17,7 +15,6 @@ import io.mockk.impl.annotations.SpyK
 import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.OK
 
@@ -53,5 +50,19 @@ class UserControllerTest{
 
         assertThat(response.statusCode).isEqualTo(OK)
         assertThat(response.body).isEqualTo(expectedUserDTO)
+    }
+
+    @Test
+    fun `should get all users with devices`() {
+        val expectedUser = createUser()
+        val expectedUserListDTO = listOf(expectedUser).let(dtoMapper::toUserListDTO)
+
+        every { userService.getAllUsersWithDevices() } returns listOf(expectedUser)
+
+
+        val response = sut.getAllUsersWithDevices()
+
+        assertThat(response.statusCode).isEqualTo(OK)
+        assertThat(response.body).isEqualTo(expectedUserListDTO)
     }
 }

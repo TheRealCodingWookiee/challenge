@@ -43,6 +43,12 @@ class UserController(
        return ResponseEntity.status(OK).body(userMapper.toDto(updatedUser))
     }
 
+    @GetMapping("/devices")
+    fun getAllUsersWithDevices(): ResponseEntity<UserListDTO> {
+        val usersWithDevices = userService.getAllUsersWithDevices()
+        return ResponseEntity.ok(userMapper.toUserListDTO(usersWithDevices))
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseStatus(BAD_REQUEST)
     fun handleConstraintViolationException(e: MethodArgumentNotValidException): ResponseEntity<HashMap<String, String?>> {
