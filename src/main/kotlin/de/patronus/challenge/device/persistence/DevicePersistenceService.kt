@@ -18,6 +18,16 @@ class DevicePersistenceService(
         return mapper.toModel(createdDevice)
     }
 
+    fun getDeviceBySerialNumber(serialNumber: String): Device? {
+        val eDevice = getDeviceEntityBySerialNumber(serialNumber)
+
+        return mapper.toModel(eDevice)
+    }
+
+    private fun getDeviceEntityBySerialNumber(serialNumber: String): EDevice? {
+        return deviceRepository.findBySerialNumber(serialNumber)
+    }
+
     fun getOneDevice(deviceId: UUID): Device {
         val eDevice = getOneDeviceEntity(deviceId)
 

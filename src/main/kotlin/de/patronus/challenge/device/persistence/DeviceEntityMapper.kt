@@ -12,5 +12,5 @@ interface DeviceEntityMapper {
     @Mapping(target = "user", ignore = true)
     fun toEntity(model: Device): EDevice
     @Mapping(target = "userId", source = "user.id")
-    fun toModel(entity: EDevice): Device
+    fun toModel(entity: EDevice?): Device
 }
