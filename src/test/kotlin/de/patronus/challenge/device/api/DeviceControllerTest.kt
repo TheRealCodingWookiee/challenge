@@ -2,6 +2,9 @@ package de.patronus.challenge.device.api
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import de.patronus.challenge.device.DeviceFixture
+import de.patronus.challenge.device.DeviceFixture.createDevice
+import de.patronus.challenge.device.DeviceFixture.createDeviceDTO
 import de.patronus.challenge.device.business.Device
 import de.patronus.challenge.device.business.DeviceService
 import io.mockk.every
@@ -12,6 +15,7 @@ import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.http.HttpStatus.CREATED
+import java.util.*
 
 @ExtendWith(MockKExtension::class)
 class DeviceControllerTest {
@@ -26,12 +30,10 @@ class DeviceControllerTest {
 
         every { deviceService.createDevice(any()) } returns expectedDevice
 
-        val response = sut.createDevice(createDeviceDto())
+        val response = sut.createDevice(createDeviceDTO())
 
         assertThat(response.statusCode).isEqualTo(CREATED)
         assertThat(response.body).isEqualTo(expectedDto)
     }
 
-    private fun createDevice() = Device(null, "serial number", "model", "123455667789")
-    private fun createDeviceDto() = DeviceDTO(null, "serial number", "model", "123455667789")
 }

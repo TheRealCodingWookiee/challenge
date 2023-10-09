@@ -2,7 +2,9 @@ package de.patronus.challenge.device.persistence
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import de.patronus.challenge.device.business.Device
+import de.patronus.challenge.device.DeviceFixture
+import de.patronus.challenge.device.DeviceFixture.SERIAL_NUMBER
+import de.patronus.challenge.device.DeviceFixture.createDevice
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -22,9 +24,7 @@ class DevicePersistenceServiceTest {
     fun `should save device`() {
         sut.createDevice(createDevice())
 
-        assertThat(deviceRepository.findAll().map { it.serialNumber }).containsExactly("serial number")
+        assertThat(deviceRepository.findAll().map { it.serialNumber }).containsExactly(SERIAL_NUMBER)
     }
-
-    private fun createDevice() = Device(null, "serial number", "model", "123455667789")
 
 }

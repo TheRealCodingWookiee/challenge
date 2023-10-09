@@ -2,6 +2,9 @@ package de.patronus.challenge.user.persistence
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
+import de.patronus.challenge.user.UserFixture
+import de.patronus.challenge.user.UserFixture.FIRST_NAME
+import de.patronus.challenge.user.UserFixture.createUser
 import de.patronus.challenge.user.api.UserDTO
 import de.patronus.challenge.user.business.Address
 import de.patronus.challenge.user.business.User
@@ -28,9 +31,7 @@ class UserPersistenceServiceTest {
     fun `should save user`() {
         sut.createUser(createUser())
 
-        assertThat(userRepository.findAll().map { it.firstName }).containsExactly("Bruce")
+        assertThat(userRepository.findAll().map { it.firstName }).containsExactly(FIRST_NAME)
     }
 
-    private fun createUser() = User(UUID.randomUUID(),"Bruce", "Wayne", createAddress(), LocalDate.of(2000, 1, 1))
-    private fun createAddress() = Address("Richstreet", "1", "Gotham", "12345")
 }
