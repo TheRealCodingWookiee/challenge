@@ -13,7 +13,6 @@ interface UserEntityMapper {
     fun toEntity(model: User): EUser
     fun toModel(entity: EUser): User
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "modificationDate", ignore = true)
     fun toEntity(model: Address): EAddress
