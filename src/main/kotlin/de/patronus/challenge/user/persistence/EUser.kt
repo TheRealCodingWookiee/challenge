@@ -1,11 +1,11 @@
 package de.patronus.challenge.user.persistence
 
+import de.patronus.challenge.device.persistence.EDevice
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDate
 import java.time.ZonedDateTime
-import java.util.Date
 import java.util.UUID
 
 
@@ -17,9 +17,18 @@ data class EUser(
     var lastName: String,
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true) var address: EAddress,
     var birthday: LocalDate,
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, mappedBy = "users")
+    var devices: MutableList<EDevice> = mutableListOf(),
     @CreationTimestamp @Column(updatable = false) val creationDate: ZonedDateTime?,
     @UpdateTimestamp val modificationDate: ZonedDateTime?
-)
+) {
+    fun addDevice(device: EDevice): EUser {
+        device.user = this
+        this.devices.add(device)
+
+        return this
+    }
+}
 
 @Entity
 @Table(name = "address")

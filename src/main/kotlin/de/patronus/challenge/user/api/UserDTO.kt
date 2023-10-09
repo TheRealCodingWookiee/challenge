@@ -1,5 +1,6 @@
 package de.patronus.challenge.user.api
 
+import de.patronus.challenge.device.api.DeviceDTO
 import java.time.LocalDate
 import jakarta.validation.constraints.NotEmpty
 
@@ -10,7 +11,8 @@ data class UserDTO(
     @field:NotEmpty(message = "NO_LAST_NAME_PROVIDED")
     val lastName: String?,
     val address: AddressDTO?,
-    val birthday: LocalDate?
+    val birthday: LocalDate?,
+    val devices: List<DeviceDTO>
 )
 
 data class AddressDTO(
