@@ -17,14 +17,14 @@ data class EUser(
     var lastName: String,
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true) var address: EAddress,
     var birthday: LocalDate,
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, mappedBy = "users")
-    var devices: MutableList<EDevice> = mutableListOf(),
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, mappedBy = "user")
+    var devices: MutableList<EDevice>? = mutableListOf(),
     @CreationTimestamp @Column(updatable = false) val creationDate: ZonedDateTime?,
     @UpdateTimestamp val modificationDate: ZonedDateTime?
 ) {
     fun addDevice(device: EDevice): EUser {
         device.user = this
-        this.devices.add(device)
+        this.devices?.add(device)
 
         return this
     }

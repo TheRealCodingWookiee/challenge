@@ -10,7 +10,7 @@ data class User(
     val lastName: String,
     val address: Address,
     val birthday: LocalDate,
-    val devices: List<Device>
+    val devices: List<Device>?
 )
 
 data class Address(
