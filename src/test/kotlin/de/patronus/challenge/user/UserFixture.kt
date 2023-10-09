@@ -14,7 +14,7 @@ object UserFixture {
     val LAST_NAME = "Last"
     val BIRTHDAY = LocalDate.of(2000, 1,1)
 
-    fun createUserDTO() = UserDTO(FIRST_NAME, LAST_NAME, AddressFixture.createAddressDTO(), BIRTHDAY, listOf(DeviceFixture.createDeviceDTO()))
+    fun createUserDTO() = UserDTO(ID, FIRST_NAME, LAST_NAME, AddressFixture.createAddressDTO(), BIRTHDAY, listOf(DeviceFixture.createDeviceDTO()))
     fun createUser() = User(ID, FIRST_NAME, LAST_NAME, AddressFixture.createAddress(), BIRTHDAY, listOf(DeviceFixture.createDevice()))
     fun createEUser() = EUser(ID, FIRST_NAME, LAST_NAME, AddressFixture.createEAddress(), BIRTHDAY, mutableListOf(DeviceFixture.createEDevice()), creationDate = ZonedDateTime.now(), modificationDate = ZonedDateTime.now())
 }
