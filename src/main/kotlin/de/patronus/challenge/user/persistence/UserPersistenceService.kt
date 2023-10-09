@@ -20,6 +20,15 @@ class UserPersistenceService(
         return userEntityMapper.toModel(eUser)
     }
 
+    fun findAllUsersWithDevices(): List<User> {
+        val eUsers = userRepository.findAllByDevicesIsNotNull()
+        if (eUsers.isEmpty()) {
+            throw UserNotFound()
+        }
+
+        return userEntityMapper.toModelList(eUsers)
+    }
+
     fun assignDeviceToUser(device: Device, userId: UUID): User {
         val eUser = getOneUserEntity(userId)
         val eDevice = deviceEntityMapper.toEntity(device)

@@ -3,6 +3,7 @@ package de.patronus.challenge.user.persistence
 import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.containsExactly
+import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotNull
 import de.patronus.challenge.device.DeviceFixture.createDevice
@@ -38,6 +39,22 @@ class UserPersistenceServiceTest {
         sut.createUser(createUser())
 
         assertThat(userRepository.findAll().map { it.firstName }).containsExactly(FIRST_NAME)
+    }
+
+    @Test
+    fun `should find all users with devices`() {
+        val device = createDevice()
+        val eUser = sut.createUser(createUser())
+        val eUserWithDevice = sut.assignDeviceToUser(device, eUser.id!!)
+        val result = sut.findAllUsersWithDevices()
+
+        assertThat(result).containsExactly(eUserWithDevice)
+    }
+
+    @Test
+    fun `should throw error if no user with devices`() {
+        val eUser = sut.createUser(createUser())
+        assertFailure { sut.findAllUsersWithDevices() }.isInstanceOf(UserNotFound::class)
     }
 
     @Test

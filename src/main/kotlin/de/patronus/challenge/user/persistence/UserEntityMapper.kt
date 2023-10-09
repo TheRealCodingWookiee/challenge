@@ -17,4 +17,5 @@ interface UserEntityMapper {
     @Mapping(target = "modificationDate", ignore = true)
     fun toEntity(model: Address): EAddress
     fun toModel(entity: EAddress): Address
+    fun toModelList(eUsers: List<EUser>): List<User>
 }

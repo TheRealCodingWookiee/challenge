@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface UserRepository : JpaRepository<EUser, UUID>
+interface UserRepository : JpaRepository<EUser, UUID> {
+    fun findAllByDevicesIsNotNull(): List<EUser>
+}
