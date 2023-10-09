@@ -9,6 +9,8 @@ import org.mapstruct.Mapping
 interface DeviceEntityMapper {
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "modificationDate", ignore = true)
+    @Mapping(target = "user", ignore = true)
     fun toEntity(model: Device): EDevice
+    @Mapping(target = "userId", source = "user.id")
     fun toModel(entity: EDevice): Device
 }

@@ -6,5 +6,6 @@ data class Device(
     val id: UUID?,
     val serialNumber: String,
     val model: String?,
-    val phoneNumber: String?
+    val phoneNumber: String?,
+    val userId: UUID?
 )

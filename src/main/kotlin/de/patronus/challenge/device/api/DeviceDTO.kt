@@ -8,5 +8,6 @@ data class DeviceDTO(
     @field:NotEmpty(message = "NO_SERIAL_NUMBER_PROVIDED")
     val serialNumber: String,
     val model: String?,
-    val phoneNumber: String?
+    val phoneNumber: String?,
+    val userId: UUID?
 )
