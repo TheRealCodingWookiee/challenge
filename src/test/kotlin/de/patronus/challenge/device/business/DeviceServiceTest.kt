@@ -25,10 +25,18 @@ class DeviceServiceTest {
     @Test
     fun `should call persistence service for creating device`() {
         val device = createDevice()
-
+        every { devicePersistenceService.getDeviceBySerialNumber(any()) } returns null
         sut.createDevice(device)
 
         verify { devicePersistenceService.createDevice(device) }
+    }
+
+    @Test
+    fun `should throw error if device with serial number already exists`() {
+        val device = createDevice()
+        every { devicePersistenceService.getDeviceBySerialNumber(any()) } returns device
+
+        assertFailure { sut.createDevice(device) }.isInstanceOf(DeviceWithSerialNumberExists::class)
     }
 
     @Test

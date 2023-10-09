@@ -33,7 +33,16 @@ class DevicePersistenceServiceTest {
     }
 
     @Test
-    fun `should get one device if exist`() {
+    fun `should get one device by serial number`() {
+        val createdDevice = sut.createDevice(createDevice())
+
+        val result = sut.getDeviceBySerialNumber(createdDevice.serialNumber)
+
+        assertThat(result).isEqualTo(createdDevice)
+    }
+
+    @Test
+    fun `should get one device by id if exist`() {
         val createdDevice = sut.createDevice(createDevice())
 
         val result = sut.getOneDevice(createdDevice.id!!)
