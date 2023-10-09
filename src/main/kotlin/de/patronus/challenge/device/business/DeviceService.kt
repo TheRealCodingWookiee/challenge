@@ -10,6 +10,10 @@ class DeviceService(
 ) {
 
     fun createDevice(device: Device): Device {
+        if (devicePersistenceService.getDeviceBySerialNumber(device.serialNumber) != null) {
+            throw DeviceWithSerialNumberExists()
+        }
+
         return devicePersistenceService.createDevice(device)
     }
 

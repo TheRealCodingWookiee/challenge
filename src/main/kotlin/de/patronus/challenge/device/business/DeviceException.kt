@@ -16,3 +16,5 @@ abstract class DeviceException(code: String, status: HttpStatus):
 class DeviceNotFound : DeviceException("DEVICE_NOT_FOUND", NOT_FOUND)
 
 class DeviceAlreadyAssigned : DeviceException("DEVICE_ALREADY_ASSIGNED", CONFLICT)
+
+class DeviceWithSerialNumberExists : DeviceException("SERIAL_NUMBER_ALREADY_EXISTS", CONFLICT)
